@@ -34,7 +34,6 @@ def get_rule_doc(name):
     """Decode and return the docstring(s) of a sequana/snakemake rule."""
     try:
         from sequana_pipetools import Module
-
         rule = Module(name)
         filename = rule.path + "/%s.rules" % name
         data = open(filename, "r").read()
