@@ -34,6 +34,11 @@ metainfo = {
 }
 
 
+# handle sequana_pipetools git link
+with open("requirements.txt") as fh:
+    requirements = [req.rstrip() if not req.startswith("git+") else req.rstrip().split('egg=')[-1] for req in fh]
+
+
 setup(
     name="sequana_sphinxext",
     version=version,
@@ -50,7 +55,7 @@ setup(
     classifiers=metainfo["classifiers"],
     # package installation
     packages=find_packages(exclude=["tests*"]),
-    install_requires=open("requirements.txt").read(),
+    install_requires=requirements,
     tests_require=["pytest", "coverage", "pytest-cov"],
     # This is recursive include of data files
     exclude_package_data={"": ["__pycache__"]},
