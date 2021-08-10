@@ -22,15 +22,11 @@ a sequana wrappers Snakefile .
 The name must be a valid sequana wrappers
 
 """
-import re
 import requests
 from docutils.nodes import Body, Element
 
 
-from docutils import nodes
-from docutils.parsers.rst import Directive
-
-from sphinx.locale import _
+# from sphinx.locale import _
 from sphinx.util.docutils import SphinxDirective
 
 
@@ -152,7 +148,7 @@ def setup(app):
     )
 
     return {
-        "version": "todo in sequana_pipetools.sphinxext",
+        "version": "1.0",
         "parallel_read_safe": True,
         "parallel_write_safe": True,
     }

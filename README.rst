@@ -1,12 +1,12 @@
-SEQUANA Sphinxext
+Sequana Sphinxext
 ##################
 
 
-.. image:: https://badge.fury.io/py/sequana_sphinext.svg
+.. image:: https://badge.fury.io/py/sequana_sphinxext.svg
     :target: https://pypi.python.org/pypi/sequana_sphinxext
 
-.. image:: https://github.com/sequana/sequana_sphinxext/actions/workflows/main.yml/badge.svg?branch=master
-    :target: https://github.com/sequana/sequana_sphinext/actions/workflows/main.yml
+.. image:: https://github.com/sequana/sequana_sphinxext/actions/workflows/ci.yml/badge.svg?branch=master
+    :target: https://github.com/sequana/sequana_sphinext/actions/workflows/ci.yml
 
 .. image:: https://coveralls.io/repos/github/sequana/sequana_sphinx/badge.svg?branch=master
     :target: https://coveralls.io/github/sequana/sequana_sphinxext?branch=master 

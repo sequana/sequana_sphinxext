@@ -23,12 +23,8 @@ The name must be a valid sequana rule in the rules directory accesible via the
 :class:`sequana.snaketools.Module` class
 
 """
-import re
 from docutils.nodes import Body, Element
 
-
-from docutils import nodes
-from docutils.parsers.rst import Directive
 
 from sphinx.locale import _
 from sphinx.util.docutils import SphinxDirective
@@ -38,8 +34,9 @@ def get_rule_doc(name):
     """Decode and return the docstring(s) of a sequana/snakemake rule."""
     try:
         from sequana_pipetools import Module
+
         rule = Module(name)
-        filename = rule.path + "/%s.rules" %  name
+        filename = rule.path + "/%s.rules" % name
         data = open(filename, "r").read()
     except ValueError:
         # a local file ?
@@ -48,7 +45,7 @@ def get_rule_doc(name):
     # Try to identify the rule and therefore possible docstring
     # It may be a standard rule or a dynamic rule !
     # standard one
-    if name.endswith('_dynamic'):
+    if name.endswith("_dynamic"):
         name = name[:-8]
     rulename_tag = "rule %s" % name
     if rulename_tag in data:
@@ -77,7 +74,7 @@ def get_rule_doc(name):
     if end == -1 or end < start:
         return "no end of docstring found for %s " % name
 
-    docstring = data[start+3:end]
+    docstring = data[start + 3 : end]
     return docstring
 
 
@@ -100,6 +97,7 @@ def run(content, node_class, state, content_offset):
     state.nested_parse(content, content_offset, node)
     return [node]
 
+
 class SnakemakeDirective(SphinxDirective):
 
     has_content = True
@@ -109,25 +107,26 @@ class SnakemakeDirective(SphinxDirective):
 
 
 def setup(app):
-   
+
     setup.app = app
     setup.config = app.config
     setup.confdir = app.confdir
-    app.add_directive('snakemakerule', SnakemakeDirective)
+    app.add_directive("snakemakerule", SnakemakeDirective)
 
     # Add visit/depart methods to HTML-Translator:
     def visit_perform(self, node):
         # Ideally, we should use sphinx but this is a simple temporary solution
         from docutils import core
         from docutils.writers.html4css1 import Writer
+
         w = Writer()
         try:
-            res = core.publish_parts(node.rule_docstring, writer=w)['html_body']
-            self.body.append('<div class="snakemake">' + res + '</div>' )
+            res = core.publish_parts(node.rule_docstring, writer=w)["html_body"]
+            self.body.append('<div class="snakemake">' + res + "</div>")
             node.children = []
         except Exception as err:
             print(err)
-            self.body.append('<div class="snakemake"> no docstring </div>' )
+            self.body.append('<div class="snakemake"> no docstring </div>')
 
     def depart_perform(self, node):
         node.children = []
@@ -138,16 +137,14 @@ def setup(app):
     def visit_ignore(self, node):
         node.children = []
 
-    import sequana
-
-
-    app.add_node(snakemake_rule,
-                 html=(visit_perform, depart_perform),
-                 latex=(visit_ignore, depart_ignore))
-
+    app.add_node(
+        snakemake_rule,
+        html=(visit_perform, depart_perform),
+        latex=(visit_ignore, depart_ignore),
+    )
 
     return {
-        'version': sequana.version,
-        'parallel_read_safe': True,
-        'parallel_write_safe': True,
+        "version": "1.0",
+        "parallel_read_safe": True,
+        "parallel_write_safe": True,
     }
