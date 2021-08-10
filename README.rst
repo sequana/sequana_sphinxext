@@ -8,7 +8,7 @@ Sequana Sphinxext
 .. image:: https://github.com/sequana/sequana_sphinxext/actions/workflows/ci.yml/badge.svg?branch=master
     :target: https://github.com/sequana/sequana_sphinext/actions/workflows/ci.yml
 
-.. image:: https://coveralls.io/repos/github/sequana/sequana_sphinx/badge.svg?branch=master
+.. image:: https://coveralls.io/repos/github/sequana/sequana_sphinxext/badge.svg?branch=master
     :target: https://coveralls.io/github/sequana/sequana_sphinxext?branch=master 
 
 .. image:: http://joss.theoj.org/papers/10.21105/joss.00352/status.svg

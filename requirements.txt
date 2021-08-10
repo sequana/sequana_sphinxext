@@ -1,1 +1,2 @@
 sphinx
+sequana_pipetools
