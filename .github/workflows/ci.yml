@@ -22,6 +22,7 @@ jobs:
       uses: actions/setup-python@v2
       with:
         python-version: ${{ matrix.python }}
+
     - name: conda
       run: |
         # $CONDA is an environment variable pointing to the root of the miniconda directory
@@ -31,14 +32,16 @@ jobs:
         conda install -c conda-forge mamba --quiet
         #conda list | grep ruamel
         #conda update ruamel_yaml
-    - name: Install sequana with pip
+    - name: Install sequana_sphinxext (and dependencies)
       run: |
         pip install -r requirements.txt
         pip install -r requirements_dev.txt
         pip install .
-    - name: Test with pytest
+
+    - name: run tests (pytest)
       run: |
         pytest --cov-report term --cov=sequana_sphinxext
+
     - name: coveralls
       run: |
         coveralls --service=github

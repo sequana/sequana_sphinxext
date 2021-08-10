@@ -1,2 +1,3 @@
 sphinx
-sequana_pipetools
+git+https://github.com/sequana/sequana_pipetools.git@master#egg=sequana_pipetools
+

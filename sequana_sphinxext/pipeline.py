@@ -20,7 +20,7 @@ a snakemake rule (from sequana project).
     .. snakemakerule: dag
 
 The name must be a valid sequana rule in the rules directory accesible via the
-:class:`sequana.snaketools.Module` class
+:class:`sequana_pipetools.snaketools.Module` class
 
 """
 from docutils.parsers.rst import directives
@@ -37,7 +37,6 @@ def get_rule_doc(name):
 
     try:
         from sequana_pipetools import Module
-
         m = Module(name)
         version = m.version
     except:
