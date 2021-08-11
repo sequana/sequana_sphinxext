@@ -32,7 +32,7 @@ from sphinx.util.docutils import SphinxDirective
 def get_rule_doc(name):
     """Decode and return the docstring(s) of a sequana/snakemake rule."""
     try:
-        from sequana_pipetools import Modul
+        from sequana_pipetools import Module
         rule = Module(name)
         filename = rule.path + "/%s.rules" % name
         data = open(filename, "r").read()
@@ -43,7 +43,7 @@ def get_rule_doc(name):
         elif name.count("/") == 1:
             # this is a rule with a version name/version/name.rules
             # and users provided name/version
-            name, prefix = name.split("/")
+            name, version = name.split("/")
             url = f"{url}/{name}/{version}/{name}.rules"
         r = requests.get(url)
         data = r.content.decode()
