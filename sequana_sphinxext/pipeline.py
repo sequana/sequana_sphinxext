@@ -12,7 +12,7 @@
 ##############################################################################
 """sequana wrappers
 
-Defines a docutils directive for inserting simple docstring extracting from 
+Defines a docutils directive for inserting simple docstring extracting from
 a snakemake rule (from sequana project).
 
 ::
@@ -23,7 +23,6 @@ The name must be a valid sequana rule in the rules directory accesible via the
 :class:`sequana_pipetools.snaketools.Module` class
 
 """
-from docutils.parsers.rst import directives
 from docutils.nodes import Body, Element
 import urllib
 from sphinx.util.docutils import SphinxDirective
@@ -39,7 +38,7 @@ def get_rule_doc(name):
         from sequana_pipetools import Module
         m = Module(name)
         version = m.version
-    except:
+    except ImportError:
         version = "?"
 
     docstring = "**current version**:{}\n\n{}".format(version, data)
@@ -61,7 +60,6 @@ def run(content, node_class, state, content_offset):
     node.rule_docstring = get_rule_doc(content[0])
     state.nested_parse(content, content_offset, node)
     return [node]
-
 
 
 class PipelineDirective(SphinxDirective):

@@ -12,7 +12,7 @@
 ##############################################################################
 """sequana wrappers
 
-Defines a docutils directive for inserting simple docstring extracting from 
+Defines a docutils directive for inserting simple docstring extracting from
 a sequana wrappers Snakefile .
 
 ::
