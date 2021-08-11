@@ -24,23 +24,34 @@ The name must be a valid sequana rule in the rules directory accesible via the
 
 """
 from docutils.nodes import Body, Element
+import requests
 
-
-from sphinx.locale import _
 from sphinx.util.docutils import SphinxDirective
 
 
 def get_rule_doc(name):
     """Decode and return the docstring(s) of a sequana/snakemake rule."""
     try:
-        from sequana_pipetools import Module
-
+        from sequana_pipetools import Modul
         rule = Module(name)
         filename = rule.path + "/%s.rules" % name
         data = open(filename, "r").read()
-    except ValueError:
-        # a local file ?
-        data = open(name, "r").read()
+    except ImportError:
+        url = "https://raw.githubusercontent.com/sequana/sequana/master/sequana/rules/"
+        if name.count("/") == 0:
+            url = f"{url}/{name}/{name}.rules"
+        elif name.count("/") == 1:
+            # this is a rule with a version name/version/name.rules
+            # and users provided name/version
+            name, prefix = name.split("/")
+            url = f"{url}/{name}/{version}/{name}.rules"
+        r = requests.get(url)
+        data = r.content.decode()
+        if "404: Not Found" in data:
+            print(f"URL not found: {url}")
+            return (
+                  f"**docstring for {name} not found**"
+             )
 
     # Try to identify the rule and therefore possible docstring
     # It may be a standard rule or a dynamic rule !

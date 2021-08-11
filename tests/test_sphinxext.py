@@ -36,7 +36,7 @@ def test_sequana_pipeline():
 
         # Create the conf and index in tmpdir
         with open(tmpdir + os.sep + "index.rst", "w") as fh:
-            fh.write(".. snakemakerule:: dag\n")
+            fh.write(".. sequana_pipeline:: fastqc\n")
 
         with open(tmpdir + os.sep + "conf.py", "w") as fh:
             print(fh.name)
@@ -50,13 +50,7 @@ def test_doc():
     res = snakemakerule.get_rule_doc("dag")
     res = snakemakerule.get_rule_doc("fastqc_dynamic")
 
-    try:
-        res = snakemakerule.get_rule_doc("dummy")
-        assert False
-    except FileNotFoundError:
-        assert True
-    except:
-        assert False
+    res = snakemakerule.get_rule_doc("dummy")
 
     with tempfile.TemporaryDirectory() as tmpdir:
 
