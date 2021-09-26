@@ -5,8 +5,8 @@ Sequana Sphinxext
 .. image:: https://badge.fury.io/py/sequana_sphinxext.svg
     :target: https://pypi.python.org/pypi/sequana_sphinxext
 
-.. image:: https://github.com/sequana/sequana_sphinxext/actions/workflows/ci.yml/badge.svg?branch=master
-    :target: https://github.com/sequana/sequana_sphinext/actions/workflows/ci.yml
+.. image:: https://github.com/sequana/sequana_sphinxext/actions/workflows/main.yml/badge.svg?branch=master
+    :target: https://github.com/sequana/sequana_sphinext/actions/workflows/main.yml
 
 .. image:: https://coveralls.io/repos/github/sequana/sequana_sphinxext/badge.svg?branch=master
     :target: https://coveralls.io/github/sequana/sequana_sphinxext?branch=master 
@@ -16,7 +16,7 @@ Sequana Sphinxext
    :alt: JOSS (journal of open source software) DOI
 
 
-:Python version: 3.6, 3.7.3, 3.8 
+:Python version:  3.7.3, 3.8 ,3.9
 :Issues: `On github <https://github.com/sequana/sequana/issues>`_
 :How to cite: Citations are important for us to carry on developments.
     For Sequana library (including the pipelines), please use

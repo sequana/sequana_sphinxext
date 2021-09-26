@@ -50,7 +50,11 @@ def test_doc():
     res = snakemakerule.get_rule_doc("dag")
     res = snakemakerule.get_rule_doc("fastqc_dynamic")
 
-    res = snakemakerule.get_rule_doc("dummy")
+    try:
+        res = snakemakerule.get_rule_doc("dummy")
+        assert False
+    except ValueError:
+        assert True
 
     with tempfile.TemporaryDirectory() as tmpdir:
 
@@ -68,6 +72,7 @@ def test_doc():
 
 
 def test_wrapper():
+    res = wrapper.get_rule_doc("fastqc")
     res = wrapper.get_rule_doc("rulegraph")
 
     with tempfile.TemporaryDirectory() as tmpdir:

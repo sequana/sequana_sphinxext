@@ -34,51 +34,54 @@ def get_rule_doc(name):
     """Decode and return the docstring(s) of a sequana wrapper."""
 
     url = "https://raw.githubusercontent.com/sequana/sequana-wrappers/main/wrappers"
-    url = f"{url}/{name}/example.smk"
+
+    url = f"{url}/{name}/README.md"
     r = requests.get(url)
 
     title = f"**{name}**\n\n"
     data = r.content.decode()
-    # Try to identify the rule and therefore possible docstring
-    # It may be a standard rule or a dynamic rule !
-    # standard one
     rulename_tag = "rule %s" % name
+
     if "404: Not Found" in data:
         print(f"URL not found: {url}")
         return (
             title
-            + f"**docstring for {name} wrapper not yet available (no example.smk found)**"
+            + f"**docstring for {name} wrapper not yet available (no README.md found)**"
         )
-    if rulename_tag in data:
-        data = data.split(rulename_tag, 1)[1]
-    else:
-        return "no docstring found for %s " % name
 
-    # Find first """ or ''' after the rule definition
-    single = data.find("'''")
-    double = data.find('"""')
-    if single > 0 and double > 0:
-        if single > double:
-            quotes = '"""'
+    def get_section(data, section):
+
+        if section in ["Example", "Configuration"]:
+            code = f"\n**{section}**\n::\n\n"
         else:
-            quotes = "'''"
-    elif single > 0:
-        quotes = "'''"
-    elif double > 0:
-        quotes = '"""'
-    else:
-        return "no docstring found for %s " % name
+            code = ""
 
-    start = data.find(quotes)
-    end = data[start + 3 :].find(quotes) + start + 3
+        found = False
+        for line in data.split("\n"):
+            # while requested section is not found, we parse the data
+            if line.startswith(f"# {section}") and not found:
+                found = True
+                continue
+            elif found and line.startswith("# "):
+                # a new section is found so, we can stop here and return the
+                # current code
+                return code
+            # the actual section is stored here
+            if found:
+                code += line + "\n"
+        if found:
+            return code
+        else:
+            return ""
 
-    if end == -1 or end < start:
-        return "no end of docstring found for %s " % name
+    example_code = get_section(data, "Example")
+    docstring = get_section(data, "Documentation")
+    config = get_section(data, "Configuration")
 
-    docstring = data[start + 3 : end]
-    code = data[end + 3 :]
-    code = "\n".join(["    " + line for line in code.split("\n")])
-    rst = title + docstring + f"\nExample:: \n\n    rule {name}:" + code
+    rst = docstring + example_code + config
+
+    url = f"https://github.com/sequana/sequana-wrappers/blob/main/wrappers/{name}/README.md"
+    rst +=  f"\n`Extra information on the wrapper page itself. <{url}>`_"
     return rst
 
 

@@ -25,6 +25,7 @@ The name must be a valid sequana rule in the rules directory accesible via the
 """
 from docutils.nodes import Body, Element
 import urllib
+from urllib.error import HTTPError
 from sphinx.util.docutils import SphinxDirective
 
 
@@ -32,12 +33,18 @@ def get_rule_doc(name):
     """Decode and return the docstring(s) of a sequana/snakemake rule."""
 
     url = "https://raw.githubusercontent.com/sequana/{}/master/README.rst".format(name)
-    data = urllib.request.urlopen(url).read().decode("utf8")
+
+    try:
+        data = urllib.request.urlopen(url).read().decode("utf8")
+    except HTTPError:
+        return f"Could not access to {url}"
 
     try:
         from sequana_pipetools import Module
-        m = Module(name)
+        m = Module(f"pipeline:{name}")
         version = m.version
+    except ValueError:
+        version = "Not installed locally."
     except ImportError:
         version = "?"
 
