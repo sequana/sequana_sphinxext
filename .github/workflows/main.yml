@@ -30,7 +30,7 @@ jobs:
 
     - name: Install sequana for the test
       run: |
-        pip insall sequana
+        pip install sequana
 
     - name: Lint with flake8
       run: |
