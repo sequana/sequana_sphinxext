@@ -41,6 +41,7 @@ def get_rule_doc(name):
 
     try:
         from sequana_pipetools import Module
+
         m = Module(f"pipeline:{name}")
         version = m.version
     except ValueError:

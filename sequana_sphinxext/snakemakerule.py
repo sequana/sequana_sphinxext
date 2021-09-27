@@ -33,6 +33,7 @@ def get_rule_doc(name):
     """Decode and return the docstring(s) of a sequana/snakemake rule."""
     try:
         from sequana_pipetools import Module
+
         rule = Module(name)
         filename = rule.path + "/%s.rules" % name
         data = open(filename, "r").read()
@@ -49,9 +50,7 @@ def get_rule_doc(name):
         data = r.content.decode()
         if "404: Not Found" in data:
             print(f"URL not found: {url}")
-            return (
-                  f"**docstring for {name} not found**"
-             )
+            return f"**docstring for {name} not found**"
 
     # Try to identify the rule and therefore possible docstring
     # It may be a standard rule or a dynamic rule !

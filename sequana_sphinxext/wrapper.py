@@ -81,7 +81,7 @@ def get_rule_doc(name):
     rst = docstring + example_code + config
 
     url = f"https://github.com/sequana/sequana-wrappers/blob/main/wrappers/{name}/README.md"
-    rst +=  f"\n`Extra information on the wrapper page itself. <{url}>`_"
+    rst += f"\n`Extra information on the wrapper page itself. <{url}>`_"
     return rst
 
 
