@@ -1,8 +1,8 @@
 from setuptools import setup, find_packages
 
 
-_MAJOR = 0
-_MINOR = 2
+_MAJOR = 1
+_MINOR = 0
 _MICRO = 0
 version = f"{_MAJOR}.{_MINOR}.{_MICRO}"
 release = f"{_MAJOR}.{_MINOR}"
@@ -13,7 +13,7 @@ metainfo = {
     "version": version,
     "license": "new BSD",
     "url": "http://github.com/sequana/sequana_sphinxext",
-    "description": "A set of standalone application and pipelines dedicated to NGS (new generation sequencing) analysis",
+    "description": "A set of sphinx extension for Sequana pipelines, wrappers and rules",
     "platforms": ["Linux", "Unix", "MacOsX", "Windows"],
     "keywords": ["NGS", "snakemake"],
     "classifiers": [

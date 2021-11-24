@@ -36,7 +36,7 @@ def get_rule_doc(name):
 
     try:
         data = urllib.request.urlopen(url).read().decode("utf8")
-    except HTTPError:
+    except HTTPError: #pragma: no cover
         return f"Could not access to {url}"
 
     try:
@@ -44,9 +44,9 @@ def get_rule_doc(name):
 
         m = Module(f"pipeline:{name}")
         version = m.version
-    except ValueError:
+    except ValueError: #pragma: no cover
         version = "Not installed locally."
-    except ImportError:
+    except ImportError: #pragma: no cover
         version = "?"
 
     docstring = "**current version**:{}\n\n{}".format(version, data)
@@ -54,7 +54,7 @@ def get_rule_doc(name):
     return docstring
 
 
-class snakemake_base(Body, Element):
+class snakemake_base(Body, Element): #pragma: no cover
     def dont_traverse(self, *args, **kwargs):
         return []
 
@@ -91,17 +91,17 @@ def setup(app):
             res = core.publish_parts(node.rule_docstring, writer=w)["html_body"]
             self.body.append('<div class="">' + res + "</div>")
             node.children = []
-        except Exception as err:
+        except Exception as err: #pragma: no cover
             print(err)
             self.body.append('<div class=""> no docstring </div>')
 
     def depart_perform(self, node):
         node.children = []
 
-    def visit_ignore(self, node):
+    def visit_ignore(self, node): #pragma: no cover
         node.children = []
 
-    def depart_ignore(self, node):
+    def depart_ignore(self, node): #pragma: no cover
         node.children = []
 
     app.add_node(

@@ -2,8 +2,8 @@ Sequana Sphinxext
 ##################
 
 
-.. image:: https://badge.fury.io/py/sequana_sphinxext.svg
-    :target: https://pypi.python.org/pypi/sequana_sphinxext
+.. image:: https://badge.fury.io/py/sequana-sphinxext.svg
+    :target: https://pypi.python.org/pypi/sequana-sphinxext
 
 .. image:: https://github.com/sequana/sequana_sphinxext/actions/workflows/main.yml/badge.svg?branch=master
     :target: https://github.com/sequana/sequana_sphinext/actions/workflows/main.yml
@@ -17,7 +17,8 @@ Sequana Sphinxext
 
 
 :Python version:  3.7.3, 3.8 ,3.9
-:Issues: `On github <https://github.com/sequana/sequana/issues>`_
+:Status: Production
+:Issues: Please fill issues `On github <https://github.com/sequana/sequana/issues>`_
 :How to cite: Citations are important for us to carry on developments.
     For Sequana library (including the pipelines), please use
 
@@ -27,4 +28,27 @@ Sequana Sphinxext
 
 The sequana_sphinxext  package is used exclusively to provide Sphinx extensions for the Sequana
 project. **Sequana** includes a set of pipelines related to NGS (new generation sequencing) including quality control, variant calling, coverage, taxonomy, transcriptomics. **Please see the** `documentation <http://sequana.readthedocs.org>`_ for an up-to-date status.
+
+We have three sphinx extension to be added in your Sphinx configuration files in the extensions list:
+
+    extensions += [
+        "sequana_sphinxext.snakemakerule",
+        "sequana_sphinxext.pipeline",
+        "sequana_sphinxext.wrapper"]
+
+You can then include a wrapper from  `sequana wrappers <https://github.com/sequana/sequana-wrappers>` using e.g.::
+
+    .. sequana_wrapper:: fastqc
+
+or a rule from Sequana::
+
+    .. snakemakerule:: fastq_sampling
+
+or a pipeline from sequana::
+
+    .. sequana_pipeline:: demultiplex
+
+
+
+
 
