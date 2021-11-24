@@ -33,7 +33,6 @@ def get_rule_doc(name):
     """Decode and return the docstring(s) of a sequana wrapper."""
 
     url = "https://raw.githubusercontent.com/sequana/sequana-wrappers/main/wrappers"
-    url = "https://raw.githubusercontent.com/cokelaer/sequana-wrappers/documentation/wrappers/"
 
     url = f"{url}/{name}/README.md"
     r = requests.get(url)
