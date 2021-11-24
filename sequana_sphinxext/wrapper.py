@@ -41,18 +41,15 @@ def get_rule_doc(name):
     data = r.content.decode()
     rulename_tag = "rule %s" % name
 
-    if "404: Not Found" in data: #pragma no cover
+    if "404: Not Found" in data:  # pragma no cover
         print(f"URL not found: {url}")
-        return (
-            title
-            + f"**docstring for {name} wrapper not yet available (no README.md found)**"
-        )
+        return title + f"**docstring for {name} wrapper not yet available (no README.md found)**"
 
     def get_section(data, section):
 
         if section in ["Example", "Configuration"]:
             code = f"\n**{section}**\n::\n\n"
-        elif section in ['References', 'Reference']:
+        elif section in ["References", "Reference"]:
             code = f"\n**{section}**\n\n"
         else:
             code = ""
@@ -79,7 +76,6 @@ def get_rule_doc(name):
     config = get_section(data, "Configuration")
     ref = get_section(data, "References")
 
-
     url = f"https://github.com/sequana/sequana-wrappers/blob/main/wrappers/{name}/README.md"
     rst = f"The `{name} <{url}>`_ wrapper "
     rst += docstring + example_code + config + ref
@@ -87,12 +83,12 @@ def get_rule_doc(name):
     return rst
 
 
-class snakemake_base(Body, Element):  #pragma: no cover
+class snakemake_base(Body, Element):  # pragma: no cover
     def dont_traverse(self, *args, **kwargs):
         return []
 
 
-class sequana_wrapper(snakemake_base): #pragma: no cover
+class sequana_wrapper(snakemake_base):  # pragma: no cover
     pass
 
 
@@ -101,7 +97,7 @@ def run(content, node_class, state, content_offset):
     name = content[0]
     try:
         node.rule_docstring = get_rule_doc(name)
-    except Exception: # pragma: no cover
+    except Exception:  # pragma: no cover
         node.rule_docstring = f"Could not read or interpret documentation for {name}"
     state.nested_parse(content, content_offset, node)
     return [node]
@@ -133,17 +129,17 @@ def setup(app):
             res = core.publish_parts(node.rule_docstring, writer=w)["html_body"]
             self.body.append('<div class="sequana_wrapper">' + res + "</div><br>")
             node.children = []
-        except Exception as err: #pragma: no cover
+        except Exception as err:  # pragma: no cover
             print(err)
             self.body.append('<div class="sequana_wrapper"> no valid docstring </div>')
 
     def depart_perform(self, node):
         node.children = []
 
-    def depart_ignore(self, node): #pragma: no cover
+    def depart_ignore(self, node):  # pragma: no cover
         node.children = []
 
-    def visit_ignore(self, node): # pragma: no cover
+    def visit_ignore(self, node):  # pragma: no cover
         node.children = []
 
     app.add_node(

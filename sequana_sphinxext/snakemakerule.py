@@ -37,7 +37,7 @@ def get_rule_doc(name):
         rule = Module(name)
         filename = rule.path + "/%s.rules" % name
         data = open(filename, "r").read()
-    except ImportError: #pragma no cover 
+    except ImportError:  # pragma no cover
         url = "https://raw.githubusercontent.com/sequana/sequana/master/sequana/rules/"
         if name.count("/") == 0:
             url = f"{url}/{name}/{name}.rules"
@@ -88,12 +88,12 @@ def get_rule_doc(name):
     return docstring
 
 
-class snakemake_base(Body, Element): #pragma: no cover
+class snakemake_base(Body, Element):  # pragma: no cover
     def dont_traverse(self, *args, **kwargs):
         return []
 
 
-class snakemake_rule(snakemake_base): #pragma: no cover
+class snakemake_rule(snakemake_base):  # pragma: no cover
     pass
 
 
@@ -141,10 +141,10 @@ def setup(app):
     def depart_perform(self, node):
         node.children = []
 
-    def depart_ignore(self, node): #pragma: no cover
+    def depart_ignore(self, node):  # pragma: no cover
         node.children = []
 
-    def visit_ignore(self, node): #pragma: no cover
+    def visit_ignore(self, node):  # pragma: no cover
         node.children = []
 
     app.add_node(
