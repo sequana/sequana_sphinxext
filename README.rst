@@ -29,14 +29,14 @@ Sequana Sphinxext
 The sequana_sphinxext  package is used exclusively to provide Sphinx extensions for the Sequana
 project. **Sequana** includes a set of pipelines related to NGS (new generation sequencing) including quality control, variant calling, coverage, taxonomy, transcriptomics. **Please see the** `documentation <http://sequana.readthedocs.org>`_ for an up-to-date status.
 
-We have three sphinx extension to be added in your Sphinx configuration files in the extensions list:
+We have three sphinx extension to be added in your Sphinx configuration files in the extensions list::
 
     extensions += [
         "sequana_sphinxext.snakemakerule",
         "sequana_sphinxext.pipeline",
         "sequana_sphinxext.wrapper"]
 
-You can then include a wrapper from  `sequana wrappers <https://github.com/sequana/sequana-wrappers>` using e.g.::
+You can then include a wrapper from  `sequana wrappers <https://github.com/sequana/sequana-wrappers>`_ using e.g.::
 
     .. sequana_wrapper:: fastqc
 
