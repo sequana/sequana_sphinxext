@@ -48,7 +48,7 @@ def test_sequana_pipeline():
 
 def test_doc():
     res = snakemakerule.get_rule_doc("dag")
-    res = snakemakerule.get_rule_doc("fastqc_dynamic")
+    res = snakemakerule.get_rule_doc("fastqc")
 
     try:
         res = snakemakerule.get_rule_doc("dummy")
